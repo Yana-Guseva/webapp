@@ -7,11 +7,10 @@ public class Main {
     static int N_CONSUMERS = 4;
     static int poisonPill = Integer.MAX_VALUE;
     static int poisonPillPerProducer = N_CONSUMERS / N_PRODUCERS;
-    static int mod = N_CONSUMERS % N_PRODUCERS;
 
     public static void main(String[] args) {
         BlockingQueue queue = new LinkedBlockingDeque(BOUND);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < N_PRODUCERS; i++) {
             new Thread(new NumbersProducer(queue, poisonPill, poisonPillPerProducer)).start();
         }
         for (int j = 0; j < N_CONSUMERS; j++) {
